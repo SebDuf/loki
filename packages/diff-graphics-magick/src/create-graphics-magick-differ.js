@@ -4,6 +4,7 @@ const gm = require('gm');
 function createGraphicsMagickDiffer(config) {
   return function getImageDiff(path1, path2, diffPath, tolerance) {
     const instanceConfig = { tolerance: tolerance / 100, ...config };
+    fs.ensureFileSync(diffPath);
     return new Promise((resolve, reject) => {
       gm.compare(
         path1,

@@ -4,6 +4,7 @@ const looksSame = require('looks-same');
 function createLooksSameDiffer(config) {
   return function getImageDiff(path1, path2, diffPath, tolerance) {
     const instanceConfig = { tolerance, ...config };
+    fs.ensureFileSync(diffPath);
     return new Promise(async (resolve, reject) => {
       const [reference, current] = (await Promise.all([
         fs.readFile(path1),
